@@ -29,7 +29,10 @@ public class StudentCreationSteps {
 
     @When("il remplit le champ {string} avec {string}")
     public void fillField(String fieldId, String value) {
-        driver.findElement(By.id(fieldId)).sendKeys(value);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id(fieldId)));
+        element.clear();
+        element.sendKeys(value);
     }
 
     @When("il sélectionne le programme {string}")
@@ -40,8 +43,9 @@ public class StudentCreationSteps {
 
     @When("il clique sur le bouton {string}")
     public void clickSubmitButton(String buttonName) {
-        // En cherchant par ID directement pour eviter les soucis de nom de bouton multi-langues
-        driver.findElement(By.id("submit-btn")).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.id("submit-btn")));
+        button.click();
     }
 
     @Then("le message de succès doit s'afficher")
