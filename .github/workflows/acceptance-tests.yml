@@ -1,0 +1,41 @@
+# Nom du workflow tel qu'il apparaîtra dans l'onglet "Actions" de GitHub
+name: CI Acceptance Tests
+
+# Définit les événements qui déclenchent automatiquement ce script
+on:
+  # Se déclenche lors d'un 'push' (envoi de code)
+  push:
+    # Uniquement si le push concerne la branche 'main'
+    branches: [ main ]
+  # Se déclenche aussi lors de la création d'une Pull Request
+  pull_request:
+    # Ciblant la branche 'main'
+    branches: [ main ]
+
+# Liste des tâches (jobs) à exécuter
+jobs:
+  # Identifiant du job (ici nommé 'test')
+  test:
+    # Type de machine virtuelle utilisée (Ubuntu est le standard Linux sur GitHub)
+    runs-on: ubuntu-latest
+
+    # Liste des étapes successives à exécuter dans ce job
+    steps:
+      # Étape 1 : Récupère le code source du dépôt pour le copier sur la machine virtuelle
+      - uses: actions/checkout@v4
+
+      # Étape 2 : Installe l'environnement Java sur la machine
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          # Spécifie la version de Java (ici 17, cohérent avec votre pom.xml)
+          java-version: '17'
+          # Distribution OpenJDK (Temurin est très stable pour l'entreprise)
+          distribution: 'temurin'
+          # Active la mise en cache des dépendances Maven pour accélérer les futurs lancements
+          cache: maven
+
+      # Étape 3 : Exécute les tests automatisés
+      - name: Build and Run Tests
+        # Commande Maven qui compile le projet et lance les tests (Surefire)
+        run: mvn test

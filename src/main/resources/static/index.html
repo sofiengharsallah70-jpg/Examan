@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Création de Compte Étudiant - Antigravity</title>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+    
+    <div class="container">
+        <div class="form-wrapper glassmorphism">
+            <div class="header">
+                <h1>Créer un étudiant</h1>
+                <p>Espace Coordinateur</p>
+            </div>
+            
+            <form id="student-form" novalidate>
+                <div class="input-group">
+                    <label for="firstName">Prénom</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Ex: Jean" required>
+                    <span class="error-message" id="error-firstName"></span>
+                </div>
+                
+                <div class="input-group">
+                    <label for="lastName">Nom</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Ex: Dupont" required>
+                    <span class="error-message" id="error-lastName"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email institutionnel</label>
+                    <input type="email" id="email" name="email" placeholder="jean.dupont@universite.edu" required>
+                    <span class="error-message" id="error-email"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="studentNumber">Numéro étudiant</label>
+                    <input type="text" id="studentNumber" name="studentNumber" placeholder="Ex: 2026001 (Test doublon: 12345)" required>
+                    <span class="error-message" id="error-studentNumber"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="program">Programme d'étude</label>
+                    <select id="program" name="program" required>
+                        <option value="" disabled selected>Sélectionnez un programme</option>
+                        <option value="Licence Informatique">Licence Informatique</option>
+                        <option value="Master IA">Master IA</option>
+                        <option value="Ingénierie Logicielle">Ingénierie Logicielle</option>
+                    </select>
+                    <span class="error-message" id="error-program"></span>
+                </div>
+
+                <button type="submit" id="submit-btn" class="submit-btn">
+                    <span class="btn-text">Créer le compte</span>
+                    <div class="spinner" id="spinner"></div>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <div class="toast-icon">✅</div>
+        <div class="toast-content">
+            <h4>Succès</h4>
+            <p>Le compte étudiant a été créé et l'email envoyé.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
